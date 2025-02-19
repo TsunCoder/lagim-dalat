@@ -1,16 +1,16 @@
+import { AppConfigService } from '@core/config/config.service';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { swaggerConfig } from './common/swagger/swagger.config';
-import { ConfigService } from '@nestjs/config';
-import { LoggingService } from './core/logging/logging.service';
+import { swaggerConfig } from '@common/swagger/swagger.config';
+import { LoggingService } from '@infra/logging/logging.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // APP CONFIG
-  const configService = app.get(ConfigService);
-  const port = configService.get<number>('PORT', 3000);
-  const nodeEnv = configService.get<string>('NODE_ENV', 'development');
+  const configService = app.get(AppConfigService);
+  const port = configService.port;
+  const nodeEnv = configService.nodeEnv;
   swaggerConfig(app);
 
   const logger = app.get(LoggingService);

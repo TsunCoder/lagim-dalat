@@ -1,4 +1,3 @@
-import { CoreModule } from './core/core.module';
 import { Module } from '@nestjs/common';
 
 // Controllers
@@ -6,9 +5,11 @@ import { Module } from '@nestjs/common';
 // Services
 
 // Modules
+import { CoreModule } from '@core/core.module';
+import { InfraModule } from '@infra/infra.module';
 
 @Module({
-  imports: [CoreModule],
+  imports: [CoreModule, CoreModule, InfraModule],
   providers: [],
   exports: [],
 })
