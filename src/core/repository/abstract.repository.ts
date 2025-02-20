@@ -13,7 +13,7 @@ import {
 export class AbstractRepository<T extends BaseEntity>
   implements IRepository<T>
 {
-  private repository: Repository<T>;
+  protected repository: Repository<T>;
   constructor(repository: Repository<T>) {
     this.repository = repository;
   }
@@ -47,6 +47,13 @@ export class AbstractRepository<T extends BaseEntity>
     if (!entity) {
       throw new Error('Entity not found');
     }
+    return entity;
+  }
+
+  public async findListByCondition(
+    conditions: FindManyOptions<T>,
+  ): Promise<T[]> {
+    const entity = await this.repository.find(conditions);
     return entity;
   }
 
