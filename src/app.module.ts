@@ -1,3 +1,4 @@
+import { ProductService } from './modules/products/product.service';
 import { Module } from '@nestjs/common';
 
 // Controllers
@@ -10,7 +11,7 @@ import { InfraModule } from '@infra/infra.module';
 
 @Module({
   imports: [CoreModule, CoreModule, InfraModule],
-  providers: [],
+  providers: [ProductService],
   exports: [],
 })
 export class AppModule {}
