@@ -2,7 +2,7 @@ import { AbstractRepository } from '@src/core/repository/abstract.repository';
 import { Product } from '@infra/database/entities/product.entity';
 import { IProductRepository } from '../interfaces/products.interface';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 
 export class ProductRepository
   extends AbstractRepository<Product>
@@ -15,12 +15,12 @@ export class ProductRepository
     super(productRepository);
   }
 
-  async findByName(name: string): Promise<Product> {
-    if (!name) {
+  async findListByName(name: string): Promise<Product[]> {
+    if (!name.trim()) {
       throw new Error('The name must be provided');
     }
-    const product = await this.findByCondition({
-      where: { productName: name },
+    const product = await this.findListByCondition({
+      where: { productName: ILike(`%${name}`) },
     });
     if (!product) {
       throw new Error('Product not found');
