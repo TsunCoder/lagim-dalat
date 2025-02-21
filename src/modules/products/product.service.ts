@@ -8,9 +8,9 @@ import { BaseReponseDto } from '@src/core/dtos/baseResponse.dto';
 import {
   IProductRepository,
   ICategoryRepository,
-} from '@src/infra/repositories/index';
-import { CreateProductDto, ProductResponseDto } from './dtos/index';
-import { File } from '@src/infra/database/entities/index';
+} from '@src/infra/repositories';
+import { CreateProductDto, ProductResponseDto } from './dtos';
+import { File } from '@src/infra/database/entities';
 
 @Injectable()
 export class ProductService {
@@ -60,8 +60,7 @@ export class ProductService {
     if (!product) {
       return new BaseReponseDto(false, 'Product is invalid');
     }
-    const productAdd = await this.productRepository.create(product);
-    const results = mapToDto(ProductResponseDto, productAdd);
+    const results = mapToDto(ProductResponseDto, product);
 
     return new BaseReponseDto(true, 'Product added', results);
   }

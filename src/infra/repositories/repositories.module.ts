@@ -1,7 +1,7 @@
 import { Module, Global } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product, Category } from '../database/entities/index';
-import { ProductRepository, CategoryRepository } from './index';
+import { Product, Category } from '@infra/database/entities';
+import { ProductRepository, CategoryRepository } from './';
 
 @Global()
 @Module({

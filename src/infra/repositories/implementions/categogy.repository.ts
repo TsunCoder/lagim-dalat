@@ -19,12 +19,12 @@ export class CategoryRepository
     if (!id) {
       throw new Error('The name must be provided');
     }
-    const product = await this.findByCondition({
+    const category = await this.findByCondition({
       where: { id: id },
     });
-    if (!product) {
+    if (!category) {
       throw new Error('Product not found');
     }
-    return product;
+    return category;
   }
 }

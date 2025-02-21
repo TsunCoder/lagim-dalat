@@ -26,8 +26,8 @@ export class AbstractRepository<T extends BaseEntity>
     return await this.repository.save(data);
   }
 
-  public async findAll(options: FindManyOptions<T>): Promise<T[]> {
-    return await this.repository.find(options);
+  public async findAll(): Promise<T[]> {
+    return await this.repository.find();
   }
 
   public async findById(id: string): Promise<T> {

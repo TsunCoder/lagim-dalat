@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { BaseReponseDto } from '@src/core/dtos/baseResponse.dto';
-import { ProductResponseDto } from './dtos/index';
+import { ProductResponseDto } from './dtos';
 
 @Controller('product')
 export class ProductController {
@@ -11,6 +11,7 @@ export class ProductController {
   async getProductByName(
     @Query('name') name: string,
   ): Promise<BaseReponseDto<ProductResponseDto[]>> {
-    return await this.productService.getProdutByName(name);
+    const products = await this.productService.getProdutByName(name);
+    return products;
   }
 }
