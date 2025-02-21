@@ -3,11 +3,13 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { swaggerConfig } from '@common/swagger/swagger.config';
 import { LoggingService } from '@infra/logging/logging.service';
+import { APP_CONSTANTS } from './core/constants/app.constant';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // APP CONFIG
+  app.setGlobalPrefix(APP_CONSTANTS.API_PREFIX);
   const configService = app.get(AppConfigService);
   const port = configService.port;
   const nodeEnv = configService.nodeEnv;
