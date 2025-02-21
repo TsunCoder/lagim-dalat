@@ -16,7 +16,7 @@ import { DatabaseTypeEnum } from '@core/enums/databaseType.enum';
         username: configService.databaseUser,
         password: configService.databasePassword,
         database: configService.databaseName,
-        entities: [__dirname + '/../*.entity{.ts,.js}'],
+        entities: [__dirname + '/entities/*.entity{.ts,.js}'],
         synchronize: false,
       }),
       inject: [AppConfigService],

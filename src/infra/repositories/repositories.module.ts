@@ -1,17 +1,21 @@
 import { Module, Global } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Product } from '../database/entities/product.entity';
-import { ProductRepository } from './implementions/products.repository';
+import { Product, Category } from '../database/entities/index';
+import { ProductRepository, CategoryRepository } from './index';
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([Product])],
+  imports: [TypeOrmModule.forFeature([Product, Category])],
   providers: [
+    {
+      provide: 'ICategoryRepository',
+      useClass: CategoryRepository,
+    },
     {
       provide: 'IProductRepository',
       useClass: ProductRepository,
     },
   ],
-  exports: ['IProductRepository'],
+  exports: ['IProductRepository', 'ICategoryRepository'],
 })
 export class RepositoriesModule {}

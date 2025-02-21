@@ -9,10 +9,4 @@ export interface IProductRepository extends IRepository<Product> {
   listByCategoryId(id: string): Promise<Product[]>;
   // A method to list all products by category name
   listByCategoryName(name: string): Promise<Product[]>;
-  // A method to add a product
-  addProduct(product: Product): Promise<Product>;
-  // A method to update a product
-  updateProduct(id: string, product: Product): Promise<Product>;
-  // A method to delete a product
-  deleteProduct(id: string): Promise<Product>;
 }

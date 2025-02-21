@@ -8,9 +8,10 @@ import { Module } from '@nestjs/common';
 // Modules
 import { CoreModule } from '@core/core.module';
 import { InfraModule } from '@infra/infra.module';
+import { ProductModule } from './modules/products/product.module';
 
 @Module({
-  imports: [CoreModule, CoreModule, InfraModule],
+  imports: [CoreModule, CoreModule, InfraModule, ProductModule],
   providers: [ProductService],
   exports: [],
 })
