@@ -42,11 +42,10 @@ export class AbstractRepository<T extends BaseEntity>
     return entity;
   }
 
-  public async findByCondition(condition: FindOneOptions<T>): Promise<T> {
-    const entity = await this.repository.findOne(condition);
-    if (!entity) {
-      throw new Error('Entity not found');
-    }
+  public async findByCondition(
+    condition: FindOneOptions<T>,
+  ): Promise<T | null> {
+    const entity = (await this.repository.findOne(condition)) ?? null;
     return entity;
   }
 

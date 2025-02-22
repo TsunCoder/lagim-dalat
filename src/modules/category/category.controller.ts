@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { BaseReponseDto } from '@core/dtos/baseResponse.dto';
 import { CategoryResponseDto } from './dtos';
@@ -15,7 +22,11 @@ export class CategoryController {
   }
 
   @Post()
-  async createCategory(@Body() categoryDto: CreateCategoryDto) {
-    return await this.categoryService.addCategory(categoryDto);
+  async createCategory(@Body() createCategoryDto: CreateCategoryDto) {
+    const result = await this.categoryService.addCategory(createCategoryDto);
+    if (!result.success) {
+      throw new HttpException(result.message, HttpStatus.BAD_REQUEST);
+    }
+    return result;
   }
 }

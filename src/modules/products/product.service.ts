@@ -21,6 +21,15 @@ export class ProductService {
     private readonly categoryRepository: ICategoryRepository,
   ) {}
 
+  async getAllProduct(): Promise<BaseReponseDto<ProductResponseDto[]>> {
+    const products = await this.productRepository.findAll();
+    if (!products) {
+      return new BaseReponseDto(false, 'Failed to get all products');
+    }
+    const results = mapToDtos(ProductResponseDto, products);
+    return new BaseReponseDto(true, 'Get all product successfully', results);
+  }
+
   async getProdutByName(
     name: string,
   ): Promise<BaseReponseDto<ProductResponseDto[]>> {
@@ -61,7 +70,6 @@ export class ProductService {
       return new BaseReponseDto(false, 'Product is invalid');
     }
     const results = mapToDto(ProductResponseDto, product);
-
     return new BaseReponseDto(true, 'Product added', results);
   }
 }
